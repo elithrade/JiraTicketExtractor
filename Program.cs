@@ -82,12 +82,23 @@ namespace ConsoleApp
             string[] outputLines = output.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             var jiraLinks = new List<string>();
+            var ticketNumbers = new Dictionary<string, string>();
 
             foreach (var line in outputLines)
             {
-                Console.WriteLine(line);
+                string[] parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var ticketNumber = parts[2];
+                if (ticketNumber.Contains('-') && !ticketNumbers.ContainsKey(ticketNumber))
+                {
+                    // Valid ticket
+                    ticketNumbers.Add(ticketNumber, $"{jiraBaseUrl}/browse/{ticketNumber}");
+                }
             }
 
+            foreach (var kv in ticketNumbers)
+            {
+                Console.WriteLine(kv.Value);
+            }
 
             // Wait for the process to exit
             process.WaitForExit();
