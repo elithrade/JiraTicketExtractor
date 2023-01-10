@@ -39,11 +39,13 @@ namespace ConsoleApp
             if (jiraBaseUrl == null)
             {
                 Console.Error.WriteLine("Jira base url must be provided.");
+                return;
             }
 
             if (startCommitHash == null || endCommitHash == null)
             {
                 Console.Error.WriteLine("The hashes for start and end commit must be provided.");
+                return;
             }
 
             // Set the command to run and the arguments
