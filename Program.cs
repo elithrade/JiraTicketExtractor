@@ -52,6 +52,7 @@ namespace ConsoleApp
             string command = "git";
             string arguments = $"cherry -v {startCommitHash} {endCommitHash}";
 
+
             // Start the process
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -59,21 +60,15 @@ namespace ConsoleApp
                 Arguments = arguments,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true,
                 CreateNoWindow = true
             };
 
+
             Process? process = Process.Start(startInfo);
+
             if (process == null)
             {
                 Console.Error.WriteLine("Unable to start git process.");
-                return;
-            }
-
-            string error = process.StandardError.ReadToEnd();
-            if (!string.IsNullOrEmpty(error))
-            {
-                Console.WriteLine(error);
                 return;
             }
 
