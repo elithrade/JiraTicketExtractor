@@ -10,6 +10,7 @@ namespace ConsoleApp
             // Initialize variables for the switches
             string? startCommitHash = null;
             string? endCommitHash = null;
+            string? jiraBaseUrl = null;
 
             // Loop through the arguments
             for (int i = 0; i < args.Length; i++)
@@ -27,6 +28,17 @@ namespace ConsoleApp
                     // Get the value of the switch
                     endCommitHash = args[i + 1];
                 }
+                // Check for the end commit hash switch switch
+                if (args[i] == "--jiraUrl")
+                {
+                    // Get the value of the switch
+                    jiraBaseUrl = args[i + 1];
+                }
+            }
+
+            if (jiraBaseUrl == null)
+            {
+                Console.Error.WriteLine("Jira base url must be provided.");
             }
 
             if (startCommitHash == null || endCommitHash == null)
@@ -67,10 +79,13 @@ namespace ConsoleApp
             string output = process.StandardOutput.ReadToEnd();
             string[] outputLines = output.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
+            var jiraLinks = new List<string>();
+
             foreach (var line in outputLines)
             {
                 Console.WriteLine(line);
             }
+
 
             // Wait for the process to exit
             process.WaitForExit();
