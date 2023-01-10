@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/net7.0/JiraTicketExtractor.dll",
-            "args": ["--start", "0cb48a8eec79d214bb5479efe167fc6547a66cc1", "--end", "8c76231f0053608328d97b404311bc02821a14d9"],
+            "args": ["--start", "03227931358a4e71c88c962af4db054c9e81aadd", "--end", "2baa9c790a89678fca27300946d35b8e798351c7"],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
