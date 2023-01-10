@@ -67,6 +67,14 @@ namespace ConsoleApp
             string output = process.StandardOutput.ReadToEnd();
             Console.WriteLine(output);
 
+            string[] outputLines = output.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var line in outputLines)
+            {
+                Console.WriteLine(line);
+            }
+
+            // Wait for the process to exit
             process.WaitForExit();
         }
     }
