@@ -1,0 +1,12 @@
+# Ignore NuGet package directories
+**/packages
+
+# Ignore build output
+**/bin
+**/obj
+
+# Ignore Visual Studio temporary files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
