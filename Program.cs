@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace ConsoleApp
 {
@@ -52,7 +51,6 @@ namespace ConsoleApp
             string command = "git";
             string arguments = $"cherry -v {startCommitHash} {endCommitHash}";
 
-
             // Start the process
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -63,9 +61,7 @@ namespace ConsoleApp
                 CreateNoWindow = true
             };
 
-
             Process? process = Process.Start(startInfo);
-
             if (process == null)
             {
                 Console.Error.WriteLine("Unable to start git process.");
@@ -74,21 +70,7 @@ namespace ConsoleApp
 
             // Read the output
             string output = process.StandardOutput.ReadToEnd();
-            string[] outputLines = output.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-            var jiraLinks = new List<string>();
-            var ticketNumbers = new Dictionary<string, string>();
-
-            foreach (var line in outputLines)
-            {
-                string[] parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                var ticketNumber = parts[2];
-                if (ticketNumber.Contains('-') && !ticketNumbers.ContainsKey(ticketNumber))
-                {
-                    // Valid ticket
-                    ticketNumbers.Add(ticketNumber, $"{jiraBaseUrl}/browse/{ticketNumber}");
-                }
-            }
+            Dictionary<string, string> ticketNumbers = OutputParser.ParseOutput(jiraBaseUrl, output);
 
             foreach (var kv in ticketNumbers)
             {
