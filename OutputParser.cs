@@ -12,6 +12,11 @@ namespace ConsoleApp
             foreach (var line in outputLines)
             {
                 string[] parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (parts[0] != "+")
+                {
+                    // Skip identical commits
+                    continue;
+                }
                 var ticketNumber = parts[2];
                 if (ticketNumber.Contains('-') && !ticketNumbers.ContainsKey(ticketNumber))
                 {
