@@ -1,5 +1,5 @@
 # JiraTicketExtractor
-Extracting jira tickets from git commits and generate a list of jira urls.
+Extracting jira tickets from git commits and generate a list of jira urls. This program makes use of `git cherry` command, and this [blog post](http://jafrog.com/2012/03/22/git-cherry.html) for explanations on how this command work.
 
 # Usage
 `dotnet run --start <start commit hash> --end <end commit hash> --jiraUrl <jira url>`
